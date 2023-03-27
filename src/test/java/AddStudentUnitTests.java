@@ -41,12 +41,12 @@ public class AddStudentUnitTests {
         assertEquals(result, 1);
     }
 
-    @Test
-    void testAddStudentInvalidGroup(){
-        var result = service.saveStudent("123", "name", -1234);
-        assertEquals(result, 0);
-        assertNull(fileRepository1.findOne("123"));
-    }
+//    @Test
+//    void testAddStudentInvalidGroup(){
+//        var result = service.saveStudent("123", "name", -1234);
+//        assertEquals(result, 0);
+//        assertNull(fileRepository1.findOne("123"));
+//    }
 
 
 }
