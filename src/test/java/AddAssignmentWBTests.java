@@ -22,7 +22,7 @@ public class AddAssignmentWBTests {
     private StudentXMLRepository fileRepository1;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         Validator<Student> studentValidator = new StudentValidator();
         Validator<Tema> temaValidator = new TemaValidator();
         Validator<Nota> notaValidator = new NotaValidator();
@@ -35,21 +35,42 @@ public class AddAssignmentWBTests {
     }
 
     @AfterEach
-    void cleanUp(){
+    void cleanUp() {
         service.deleteTema("1");
     }
 
     @Test
-    void testCase1(){
-        var result = service.saveTema("1", "desc", 2,1 );
+    void testCase1() {
+        var result = service.saveTema("1", "Abc", 2, 1);
         assertEquals(result, 1);
     }
 
-
     @Test
-    void testCase2(){
-        assertThrows(Exception.class, () -> service.saveTema("1", "desc", 15,1 ));
+    void testCase2() {
+        assertThrows(Exception.class, () -> service.saveTema(null, "Abc", 2, 1));
     }
 
+    @Test
+    void testCase3() {
+        assertThrows(Exception.class, () -> service.saveTema("1", null, 2, 1));
+    }
 
+    @Test
+    void testCase4() {
+        assertThrows(Exception.class, () -> service.saveTema("1", "Abc", -10, 1));
+    }
+
+    @Test
+    void testCase5() {
+        assertThrows(Exception.class, () -> service.saveTema("1", "Abc", 2, -10));
+    }
+
+    @Test
+    void testCase6() {
+        service.saveTema("1", "A", 2, 1);
+
+
+        var result = service.saveTema("1", "Abc", 2, 1);
+        assertEquals(result, 0);
+    }
 }
